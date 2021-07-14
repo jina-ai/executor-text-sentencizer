@@ -1,12 +1,6 @@
-# 📝 PLEASE READ [THE GUIDELINES](.github/GUIDELINES.md) BEFORE STARTING.
+# ✨ Sentencizer
 
-# 🏗️ PLEASE CHECK OUT [STEP-BY-STEP](.github/STEP_BY_STEP.md)
-
-----
-
-# ✨ MyDummyExecutor
-
-**MyDummyExecutor** is a class that ...
+**Sentencizer** is a class that splits texts into sentences.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -21,7 +15,7 @@
 
 ## 🌱 Prerequisites
 
-Some conditions to fulfill before running the executor
+None
 
 ## 🚀 Usages
 
@@ -33,7 +27,7 @@ Use the prebuilt images from JinaHub in your python codes,
 ```python
 from jina import Flow
 	
-f = Flow().add(uses='jinahub+docker://MyDummyExecutor')
+f = Flow().add(uses='jinahub+docker://Sentencizer')
 ```
 
 or in the `.yml` config.
@@ -41,8 +35,8 @@ or in the `.yml` config.
 ```yaml
 jtype: Flow
 pods:
-  - name: encoder
-    uses: 'jinahub+docker://MyDummyExecutor'
+  - name: sentencizer
+    uses: 'jinahub+docker://Sentencizer'
 ```
 
 #### using source codes
@@ -51,7 +45,7 @@ Use the source codes from JinaHub in your python codes,
 ```python
 from jina import Flow
 	
-f = Flow().add(uses='jinahub://MyDummyExecutor')
+f = Flow().add(uses='jinahub://Sentencizer')
 ```
 
 or in the `.yml` config.
@@ -59,24 +53,24 @@ or in the `.yml` config.
 ```yaml
 jtype: Flow
 pods:
-  - name: encoder
-    uses: 'jinahub://MyDummyExecutor'
+  - name: sentencizer
+    uses: 'jinahub://Sentencizer'
 ```
 
 
 ### 📦️ Via Pypi
 
-1. Install the `jinahub-MY-DUMMY-EXECUTOR` package.
+1. Install the `jinahub-text-sentencizer` package.
 
 	```bash
-	pip install git+https://github.com/jina-ai/EXECUTOR_REPO_NAME.git
+	pip install git+https://github.com/jina-ai/executor-text-sentencizer.git
 	```
 
-1. Use `jinahub-MY-DUMMY-EXECUTOR` in your code
+1. Use `jinahub-text-sentencizer` in your code
 
 	```python
 	from jina import Flow
-	from jinahub.SUB_PACKAGE_NAME.MODULE_NAME import MyDummyExecutor
+	from jinahub.text.sentencizer import Sentencizer
 	
 	f = Flow().add(uses=MyDummyExecutor)
 	```
@@ -87,60 +81,40 @@ pods:
 1. Clone the repo and build the docker image
 
 	```shell
-	git clone https://github.com/jina-ai/EXECUTOR_REPO_NAME.git
-	cd EXECUTOR_REPO_NAME
-	docker build -t my-dummy-executor-image .
+	git clone https://github.com/jina-ai/executor-text-sentencizer.git
+	cd executor-text-sentencizer
+	docker build -t sentencizer .
 	```
 
-1. Use `my-dummy-executor-image` in your codes
+1. Use `sentencizer` in your codes
 
 	```python
 	from jina import Flow
 	
-	f = Flow().add(uses='docker://my-dummy-executor-image:latest')
+	f = Flow().add(uses='docker://sentencizer:latest')
 	```
 	
 
-## 🎉️ Example 
-
-Here we **MUST** show a **MINIMAL WORKING EXAMPLE**. We recommend to use `jinahub+docker://MyDummyExecutor` for the purpose of boosting the usage of Jina Hub. 
-
-It not necessary to demonstrate the usages of every inputs. It will be demonstrate in the next section.
+## 🎉️ Example
 
 ```python
 from jina import Flow, Document
 
-f = Flow().add(uses='jinahub+docker://MyDummyExecutor')
+f = Flow().add(uses='jinahub+docker://Sentencizer')
 
 with f:
-    resp = f.post(on='foo', inputs=Document(), return_results=True)
+    resp = f.post(on='foo', inputs=Document(text='Hello. World.'), return_results=True)
     print(f'{resp}')
 ```
 
-### `on=/index` (Optional)
-
-When there are multiple APIs, we need to list the inputs and outputs for each one. If there is only one universal API, we only demonstrate the inputs and outputs for it.
-
 #### Inputs 
 
-`Document` with `blob` of the shape `256`.
+`Document` with `text` containing two sentences split by a dot `.`, namely `Hello. World.`.
 
 #### Returns
 
-`Document` with `embedding` fields filled with an `ndarray` of the shape `embedding_dim` (=128, by default) with `dtype=nfloat32`.
-
-### `on=/update` (Optional)
-
-When there are multiple APIs, we need to list the inputs and outputs for each on
-
-#### Inputs 
-
-`Document` with `blob` of the shape `256`.
-
-#### Returns
-
-`Document` with `embedding` fields filled with an `ndarray` of the shape `embedding_dim` (=128, by default) with `dtype=nfloat32`.
+`Document` with two `chunks` Documents. The first chunk contains `text='Hello.'`, the second chunk contains `text='World.'`
 
 ## 🔍️ Reference
-- Some reference
+- Used in the multires-lyrics-search example in: https://github.com/jina-ai/examples
 

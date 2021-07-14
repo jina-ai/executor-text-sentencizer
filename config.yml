@@ -1,4 +1,4 @@
-jtype: MyDummyExecutor
+jtype: Sentencizer
 metas:
   py_modules:
-    - MODULE_NAME.py
+    - sentencizer.py
