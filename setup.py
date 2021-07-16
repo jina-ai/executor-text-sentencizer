@@ -14,8 +14,8 @@ setuptools.setup(
         'Programming Language :: Python :: 3',
         'Operating System :: OS Independent',
     ],
-    py_modules=['jinahub.text.sentencizer'],
-    package_dir={'jinahub.text': '.'},
+    py_modules=['jinahub.segmenter.sentencizer'],
+    package_dir={'jinahub.segmenter': '.'},
     install_requires=open('requirements.txt').readlines(),
     python_requires='>=3.7',
 )
