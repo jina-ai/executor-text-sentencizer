@@ -1,3 +1,5 @@
+NOT MAINTAINED. MOVE TO https://github.com/jina-ai/executors/tree/main/jinahub/crafters/Sentencizer
+
 # ✨ Sentencizer
 
 **Sentencizer** is a class that splits texts into sentences.
